@@ -4,6 +4,7 @@
 //
 //  Created by X Code User on 9/22/17.
 //  Copyright © 2017 GVSU School of Computing. All rights reserved.
+//   name goes here. 
 //
 
 import UIKit
