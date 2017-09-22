@@ -16,8 +16,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var lat2: DecimalMinusTextField!
     @IBOutlet weak var long2: DecimalMinusTextField!
     @IBAction func clearClicked(_ sender: Any) {
+        lat1.text = ""
+        long1.text = ""
+        lat2.text = ""
+        long2.text = ""
+        
     }
     @IBAction func calculatePressed(_ sender: Any) {
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
