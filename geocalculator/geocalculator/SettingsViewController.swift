@@ -13,17 +13,32 @@ protocol SettingsViewControllerDelegate{
 }
 
 class SettingsViewController: UIViewController {
-
+    let distanceUnits : [String] = ["Kilometers","Miles"]
+    let bearingUnits : [String] = ["Degrees", "Mils"]
+    var editingDistance : Bool = true
+    @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var bearing: UILabel!
+    
+    @IBAction func savePressed(_ sender: UIBarButtonItem) {
+       
+    }
+    @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
+    }
+    
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     var selection : String = "Kilometers"
     var delegate : SettingsViewControllerDelegate?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDistance))
+        distance.addGestureRecognizer(gestureRecognizer)
         
-        self.pickerData = ["Kilometers","Miles"]
+        let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleBearing))
+        bearing.addGestureRecognizer(gestureRecognizer2)
+    
+        self.pickerData = distanceUnits
         self.picker.delegate = self
         self.picker.dataSource = self
     }
@@ -38,6 +53,22 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func handleDistance(getureRecognizer: UIGestureRecognizer)
+    {
+        picker.isHidden = false
+        self.pickerData = distanceUnits
+        self.picker.dataSource = self
+        editingDistance = true
+    }
+    
+    func handleBearing(getureRecognizer: UIGestureRecognizer)
+    {
+        picker.isHidden = false
+        self.pickerData = bearingUnits
+        self.picker.dataSource = self
+        editingDistance = false
     }
 }
 extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate{
@@ -59,5 +90,13 @@ extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         self.selection = self.pickerData[row]
+        if editingDistance
+        {
+            distance.text = self.selection
+        }
+        else
+        {
+            bearing.text = self.selection
+        }
     }
 }
