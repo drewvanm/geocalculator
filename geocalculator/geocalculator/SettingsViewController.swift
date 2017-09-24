@@ -15,16 +15,15 @@ protocol SettingsViewControllerDelegate{
 class SettingsViewController: UIViewController {
     let distanceUnits : [String] = ["Kilometers","Miles"]
     let bearingUnits : [String] = ["Degrees", "Mils"]
+    
+    var currentDistanceUnit : String?
+    var currentBearingUnit : String?
+    
     var editingDistance : Bool = true
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var bearing: UILabel!
     
-    @IBAction func savePressed(_ sender: UIBarButtonItem) {
-       
-    }
-    @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
-    }
-    
+  
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     var selection : String = "Kilometers"
@@ -32,6 +31,14 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let dist = currentDistanceUnit {
+            self.distance.text = dist
+        }
+        if let bear = currentBearingUnit {
+            self.bearing.text = bear
+        }
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDistance))
         distance.addGestureRecognizer(gestureRecognizer)
         
@@ -50,6 +57,22 @@ class SettingsViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToCalcFromCancel"
+        {
+            if let destVC = segue.destination.childViewControllers[0] as? ViewController {
+                destVC.bearingUnit = self.currentBearingUnit
+                destVC.distanceUnit = self.currentDistanceUnit
+            }
+        }
+        else if segue.identifier == "segueToCalcFromSave"
+        {
+            if let destVC = segue.destination.childViewControllers[0] as? ViewController {
+                destVC.bearingUnit = self.bearing.text
+                destVC.distanceUnit = self.distance.text
+            }
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

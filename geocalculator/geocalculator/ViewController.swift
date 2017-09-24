@@ -18,8 +18,8 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var bearing: UILabel!
-    var distanceUnit: String = ""
-    var bearingUnit: String = ""
+    var distanceUnit: String?
+    var bearingUnit: String?
     
     @IBAction func clearClicked(_ sender: Any) {
         lat1.text = ""
@@ -31,13 +31,20 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         
     }
     @IBAction func calculatePressed(_ sender: Any) {
-        
+        //TODO math for distance and bearing based on distanceUnit and bearingUnit
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         let detectTouch = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(detectTouch)
+        
+        if let dist = self.distanceUnit {
+            self.distance.text = dist
+        }
+        if let bear = self.bearingUnit {
+            self.bearing.text = bear
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,10 +60,16 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         distanceUnit = distanceUnits
         bearingUnit = bearingUnits
     }
-    /*
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: <#T##UIStoryboardSegue#>, sender: <#T##Any?#>)
+        if segue.identifier == "segueToSettings"
+        {
+            if let destVC = segue.destination.childViewControllers[0] as? SettingsViewController {
+                destVC.currentBearingUnit = self.bearingUnit
+                destVC.currentDistanceUnit = self.distanceUnit
+            }
+        }
+      
     }
-     */
 }
 
