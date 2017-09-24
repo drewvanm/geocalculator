@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, SettingsViewControllerDelegate {
+class ViewController: UIViewController {
     @IBOutlet weak var lat1: DecimalMinusTextField!
     @IBOutlet weak var long1: DecimalMinusTextField!
 
@@ -32,6 +32,8 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     }
     @IBAction func calculatePressed(_ sender: Any) {
         //TODO math for distance and bearing based on distanceUnit and bearingUnit
+        //also if distanceUnit is nil then assume its in Kilometers
+        //same for bearingUnit, if it is nil then assume the units are Degrees
         
     }
     override func viewDidLoad() {
@@ -39,12 +41,6 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         let detectTouch = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(detectTouch)
         
-        if let dist = self.distanceUnit {
-            self.distance.text = dist
-        }
-        if let bear = self.bearingUnit {
-            self.bearing.text = bear
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,11 +51,7 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    
-    func settingsChanged(distanceUnits: String, bearingUnits: String) {
-        distanceUnit = distanceUnits
-        bearingUnit = bearingUnits
-    }
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSettings"

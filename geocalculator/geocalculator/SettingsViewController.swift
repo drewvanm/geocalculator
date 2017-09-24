@@ -8,9 +8,7 @@
 
 import UIKit
 
-protocol SettingsViewControllerDelegate{
-    func settingsChanged(distanceUnits: String, bearingUnits: String)
-}
+
 
 class SettingsViewController: UIViewController {
     let distanceUnits : [String] = ["Kilometers","Miles"]
@@ -27,7 +25,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     var selection : String = "Kilometers"
-    var delegate : SettingsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +47,6 @@ class SettingsViewController: UIViewController {
         self.picker.dataSource = self
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let d = self.delegate {
-            d.settingsChanged(distanceUnits: selection, bearingUnits: "Degrees")
-        }
-    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToCalcFromCancel"
