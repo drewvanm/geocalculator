@@ -14,6 +14,7 @@
 		33108BC31F75712000EC2B5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33108BC11F75712000EC2B5F /* LaunchScreen.storyboard */; };
 		33108BCB1F7573CD00EC2B5F /* DecimalMinusTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33108BCA1F7573CD00EC2B5F /* DecimalMinusTextField.swift */; };
 		B87A40ED1F768A6700E1FFA9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87A40EC1F768A6700E1FFA9 /* SettingsViewController.swift */; };
+		B89C3F9B1F7883F3009FD8D0 /* CLLocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C3F9A1F7883F3009FD8D0 /* CLLocationExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		33108BC41F75712000EC2B5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33108BCA1F7573CD00EC2B5F /* DecimalMinusTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalMinusTextField.swift; sourceTree = "<group>"; };
 		B87A40EC1F768A6700E1FFA9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B89C3F9A1F7883F3009FD8D0 /* CLLocationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 				33108BB71F75712000EC2B5F /* geocalculator */,
 				33108BB61F75712000EC2B5F /* Products */,
 				33108BCA1F7573CD00EC2B5F /* DecimalMinusTextField.swift */,
+				B89C3F9A1F7883F3009FD8D0 /* CLLocationExtensions.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B89C3F9B1F7883F3009FD8D0 /* CLLocationExtensions.swift in Sources */,
 				33108BCB1F7573CD00EC2B5F /* DecimalMinusTextField.swift in Sources */,
 				33108BBB1F75712000EC2B5F /* ViewController.swift in Sources */,
 				33108BB91F75712000EC2B5F /* AppDelegate.swift in Sources */,

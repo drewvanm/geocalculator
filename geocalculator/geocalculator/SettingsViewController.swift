@@ -11,6 +11,10 @@ import UIKit
 
 
 class SettingsViewController: UIViewController {
+    var text1: String?
+    var text2: String?
+    var text3: String?
+    var text4: String?
     let distanceUnits : [String] = ["Kilometers","Miles"]
     let bearingUnits : [String] = ["Degrees", "Mils"]
     
@@ -54,13 +58,20 @@ class SettingsViewController: UIViewController {
             if let destVC = segue.destination.childViewControllers[0] as? ViewController {
                 destVC.bearingUnit = self.currentBearingUnit
                 destVC.distanceUnit = self.currentDistanceUnit
-            }
+                destVC.text1 = self.text1
+                destVC.text2 = self.text2
+                destVC.text3 = self.text3
+                destVC.text4 = self.text4            }
         }
         else if segue.identifier == "segueToCalcFromSave"
         {
             if let destVC = segue.destination.childViewControllers[0] as? ViewController {
                 destVC.bearingUnit = self.bearing.text
                 destVC.distanceUnit = self.distance.text
+                destVC.text1 = self.text1
+                destVC.text2 = self.text2
+                destVC.text3 = self.text3
+                destVC.text4 = self.text4
             }
         }
     }
