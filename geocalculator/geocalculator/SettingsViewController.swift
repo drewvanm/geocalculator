@@ -25,11 +25,22 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var bearing: UILabel!
     
     @IBAction func SavePressed(_ sender: Any) {
-        
+        if let d = self.delegate {
+            d.settingChanged(distanceUnits: distance.text!, bearingUnits: bearing.text!)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        
-        //self.dismiss(animated: true, completion: nil)
+        if let d = self.delegate {
+            if currentDistanceUnit == nil || currentBearingUnit == nil{
+                d.settingChanged(distanceUnits: "Kilometers" , bearingUnits: "Degrees")
+            }
+            else{
+                d.settingChanged(distanceUnits: currentDistanceUnit! , bearingUnits: currentBearingUnit!)
+
+            }
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
@@ -48,6 +59,12 @@ class SettingsViewController: UIViewController {
         let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleBearing))
         bearing.addGestureRecognizer(gestureRecognizer2)
     
+        if let du = currentDistanceUnit{
+            distance.text = du
+        }
+        if let bu = currentBearingUnit{
+            bearing.text = bu
+        }
         self.pickerData = distanceUnits
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -73,12 +90,7 @@ class SettingsViewController: UIViewController {
         self.picker.dataSource = self
         editingDistance = false
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let d = self.delegate {
-            d.settingChanged(distanceUnits: distance.text!, bearingUnits: bearing.text!)
-        }
-    }
+   
     func dismissSettingsKeyboard(){
         self.picker.isHidden = true
     }

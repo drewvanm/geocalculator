@@ -158,7 +158,11 @@
                                 <action selector="cancelButtonPressed:" destination="WVJ-13-qNo" id="UHJ-8q-dJE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="XS2-uz-ClV"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="XS2-uz-ClV">
+                            <connections>
+                                <action selector="SavePressed:" destination="WVJ-13-qNo" id="I1S-kL-lwh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

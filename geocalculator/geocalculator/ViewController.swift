@@ -26,6 +26,7 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     func settingChanged(distanceUnits: String, bearingUnits: String) {
         self.bearingUnit = bearingUnits
         self.distanceUnit = distanceUnits
+        calculatePressed(self)
     }
     
     @IBAction func clearClicked(_ sender: Any) {
