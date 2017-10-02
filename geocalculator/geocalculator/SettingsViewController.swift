@@ -8,13 +8,12 @@
 
 import UIKit
 
-
+protocol SettingsViewControllerDelegate{
+    func settingChanged(distanceUnits: String, bearingUnits: String)
+}
 
 class SettingsViewController: UIViewController {
-    var text1: String?
-    var text2: String?
-    var text3: String?
-    var text4: String?
+    var delegate : SettingsViewControllerDelegate?
     let distanceUnits : [String] = ["Kilometers","Miles"]
     let bearingUnits : [String] = ["Degrees", "Mils"]
     
@@ -25,7 +24,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var bearing: UILabel!
     
-  
+    @IBAction func SavePressed(_ sender: Any) {
+        
+    }
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        
+        //self.dismiss(animated: true, completion: nil)
+    }
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
     var selection : String = "Kilometers"
@@ -33,12 +38,9 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let dist = currentDistanceUnit {
-            self.distance.text = dist
-        }
-        if let bear = currentBearingUnit {
-            self.bearing.text = bear
-        }
+        let detectTouch1 = UITapGestureRecognizer(target: self, action: #selector(dismissSettingsKeyboard))
+        self.view.addGestureRecognizer(detectTouch1)
+
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDistance))
         distance.addGestureRecognizer(gestureRecognizer)
@@ -51,30 +53,6 @@ class SettingsViewController: UIViewController {
         self.picker.dataSource = self
     }
 
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToCalcFromCancel"
-        {
-            if let destVC = segue.destination.childViewControllers[0] as? ViewController {
-                destVC.bearingUnit = self.currentBearingUnit
-                destVC.distanceUnit = self.currentDistanceUnit
-                destVC.text1 = self.text1
-                destVC.text2 = self.text2
-                destVC.text3 = self.text3
-                destVC.text4 = self.text4            }
-        }
-        else if segue.identifier == "segueToCalcFromSave"
-        {
-            if let destVC = segue.destination.childViewControllers[0] as? ViewController {
-                destVC.bearingUnit = self.bearing.text
-                destVC.distanceUnit = self.distance.text
-                destVC.text1 = self.text1
-                destVC.text2 = self.text2
-                destVC.text3 = self.text3
-                destVC.text4 = self.text4
-            }
-        }
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,6 +72,15 @@ class SettingsViewController: UIViewController {
         self.pickerData = bearingUnits
         self.picker.dataSource = self
         editingDistance = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let d = self.delegate {
+            d.settingChanged(distanceUnits: distance.text!, bearingUnits: bearing.text!)
+        }
+    }
+    func dismissSettingsKeyboard(){
+        self.picker.isHidden = true
     }
 }
 extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate{

@@ -9,19 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="ytl-px-sVY">
-            <objects>
-                <navigationController id="CAl-76-daB" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o0s-QR-IAD">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lqn-xd-IG1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1389" y="155"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -39,7 +26,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
-                                    <segue destination="pbx-0Z-TGo" kind="show" identifier="segueToSettings" id="nOl-5x-EM5"/>
+                                    <segue destination="WVJ-13-qNo" kind="show" identifier="segueToSettings" id="hdP-Jf-OEz"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Latitude for p1" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-P4-aUo" customClass="DecimalMinusTextField" customModule="geocalculator" customModuleProvider="target">
@@ -168,16 +155,10 @@
                     <navigationItem key="navigationItem" title="Settings" id="goF-JZ-eUy">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="dyL-Md-ToX">
                             <connections>
-                                <action selector="cancelPressed:" destination="WVJ-13-qNo" id="wjy-yc-Iii"/>
-                                <segue destination="UXe-xm-aIm" kind="show" identifier="segueToCalcFromCancel" id="Y9v-6j-anV"/>
+                                <action selector="cancelButtonPressed:" destination="WVJ-13-qNo" id="UHJ-8q-dJE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="XS2-uz-ClV">
-                            <connections>
-                                <action selector="savePressed:" destination="WVJ-13-qNo" id="1PH-AR-ghD"/>
-                                <segue destination="UXe-xm-aIm" kind="show" identifier="segueToCalcFromSave" id="Za0-tx-b4n"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="XS2-uz-ClV"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -188,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG7-QI-eJJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2590" y="-641"/>
+            <point key="canvasLocation" x="1822" y="124"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pVJ-bC-aAf">
@@ -208,26 +189,5 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vXY-KI-yTM">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pbx-0Z-TGo" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vz4-bw-Wos">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="WVJ-13-qNo" kind="relationship" relationship="rootViewController" id="wM1-q4-JBn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kp8-kF-TKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1768" y="-640.47976011994012"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Za0-tx-b4n"/>
-    </inferredMetricsTieBreakers>
 </document>

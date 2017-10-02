@@ -10,12 +10,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController {
-    //used to persist data in text fields
-    var text1: String?
-    var text2: String?
-    var text3: String?
-    var text4: String?
+class ViewController: UIViewController, SettingsViewControllerDelegate {
     
     @IBOutlet weak var lat1: DecimalMinusTextField!
     @IBOutlet weak var long1: DecimalMinusTextField!
@@ -27,6 +22,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var bearing: UILabel!
     var distanceUnit: String?
     var bearingUnit: String?
+    
+    func settingChanged(distanceUnits: String, bearingUnits: String) {
+        self.bearingUnit = bearingUnits
+        self.distanceUnit = distanceUnits
+    }
     
     @IBAction func clearClicked(_ sender: Any) {
         lat1.text = ""
@@ -82,11 +82,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let detectTouch = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(detectTouch)
-        lat1.text = text1
-        long1.text = text2
-        lat2.text = text3
-        long2.text = text4
-        calculatePressed(self)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,20 +94,15 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
     }
    
-    override func viewWillDisappear(_ animated: Bool) {
-       
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSettings"
         {
-            if let destVC = segue.destination.childViewControllers[0] as? SettingsViewController {
+            if let destVC = segue.destination as? SettingsViewController {
                 destVC.currentBearingUnit = self.bearingUnit
                 destVC.currentDistanceUnit = self.distanceUnit
-                destVC.text1 = self.lat1.text
-                destVC.text2 = self.long1.text
-                destVC.text3 = self.lat2.text
-                destVC.text4 = self.long2.text
+                destVC.delegate = self
+                
             }
         }
       
